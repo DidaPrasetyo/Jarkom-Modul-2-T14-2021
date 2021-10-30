@@ -404,3 +404,19 @@ rmdir general.mecha.franky
 rm general.mecha.franky.zip
 a2ensite general.mecha.franky.TI14.com
 ```
+## 15. dengan autentikasi username luffy dan password onepiece dan file di /var/www/general.mecha.franky.yyy
+
+htpasswd -b -c /var/www/general.mecha.franky.TI14 luffy onepiece
+
+## 16. Dan setiap kali mengakses IP Skypie akan dialihkan secara otomatis ke www.franky.yyy.com
+
+Saat dicoba kemarin sudah bisa langsung menampilkan halaman yang sama dengan www.franky.TI14.com
+
+## 17. Dikarenakan Franky juga ingin mengajak temannya untuk dapat menghubunginya melalui website www.super.franky.yyy.com, dan dikarenakan pengunjung web server pasti akan bingung dengan randomnya images yang ada, maka Franky juga meminta untuk mengganti request gambar yang memiliki substring “franky” akan diarahkan menuju franky.png.
+
+```
+-
+```
+
+## Kendala : 
+- Kesulitan saat membuat autentikasi
