@@ -190,6 +190,7 @@ options {
     //      0.0.0.0;
     // };
     //dnssec-validation auto;
+
     allow-query{any;};
     auth-nxdomain no;    # conform to RFC1035
     listen-on-v6 { any; };
@@ -214,6 +215,7 @@ options {
     // forwarders {
     //      0.0.0.0;
     // };	    
+
     //dnssec-validation auto;
     allow-query{any;};
     auth-nxdomain no;    # conform to RFC1035
@@ -272,9 +274,21 @@ www.general     IN      CNAME   general.mecha.franky.TI14.com.
     ServerName franky.TI14.com
     ServerAlias www.franky.TI14.com
     DocumentRoot /var/www/franky.TI14.com
+
     ErrorLog ${APACHE_LOG_DIR}/error.log
     CustomLog ${APACHE_LOG_DIR}/access.log combined
 </VirtualHost>
+```
+
+### b. Eksekusi command
+```
+mkdir /var/www/franky.TI14.com
+wget https://github.com/FeinardSlim/Praktikum-Modul-2-Jarkom/raw/main/franky.zip -P /var/www/franky.TI14.com
+unzip franky.zip
+mv franky/* ../franky.TI14.com
+rmdir franky
+rm franky.zip
+a2ensite franky.TI14.com
 ```
 
 ## 9. Setelah itu, Luffy juga membutuhkan agar url www.franky.yyy.com/index.php/home dapat menjadi menjadi www.franky.yyy.com/home
