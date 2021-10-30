@@ -305,3 +305,102 @@ a2ensite franky.TI14.com
     CustomLog ${APACHE_LOG_DIR}/access.log combined
 </VirtualHost>
 ```
+## 10. Setelah itu, pada subdomain www.super.franky.yyy.com, Luffy membutuhkan penyimpanan aset yang memiliki DocumentRoot pada /var/www/super.franky.yyy.com
+
+### a. `/etc/apache2/sites-available/super.franky.TI14.com.conf` (Skypie)
+```
+<VirtualHost *:80>
+    ServerAdmin webmaster@localhost
+    ServerName super.franky.TI14.com
+    ServerAlias www.super.franky.TI14.com
+    DocumentRoot /var/www/super.franky.TI14.com
+
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+```
+
+### b. Eksekusi Command
+```
+mkdir /var/www/super.franky.TI14.com
+wget https://github.com/FeinardSlim/Praktikum-Modul-2-Jarkom/raw/main/super.franky.zip -P /var/www/super.franky.TI14.com
+unzip super.franky.zip
+mv super.franky/* ../super.franky.TI14.com
+rmdir super.franky
+rm super.franky.zip
+a2ensite super.franky.TI14.com
+```
+
+## 11. Akan tetapi, pada folder /public, Luffy ingin hanya dapat melakukan directory listing saja
+
+### a. `/etc/apache2/sites-available/super.franky.TI14.com.conf` (Skypie)
+```
+...
+
+<Directory /var/www/super.franky.TI14.com/public>
+	Options +Indexes
+</Directory>
+
+<Directory /var/www/super.franky.TI14.com/public/css>
+	Options -Indexes
+</Directory>
+
+<Directory /var/www/super.franky.TI14.com/public/images>
+	Options -Indexes
+</Directory>
+
+<Directory /var/www/super.franky.TI14.com/public/js>
+	Options +Indexes
+</Directory>
+
+...
+```
+
+## 12. Tidak hanya itu, Luffy juga menyiapkan error file 404.html pada folder /error untuk mengganti error kode pada apache .
+
+### a. `/etc/apache2/sites-available/super.franky.TI14.com.conf` (Skypie)
+```
+...
+
+ErrorDocument 404 /error/404.html
+
+...
+```
+
+## 13. Luffy juga meminta Nami untuk dibuatkan konfigurasi virtual host. Virtual host ini bertujuan untuk dapat mengakses file asset www.super.franky.yyy.com/public/js menjadi www.super.franky.yyy.com/js. 
+
+### a. /etc/apache2/sites-available/super.franky.TI14.com.conf
+```
+...
+
+Alias "/js" "/var/www/super.franky.TI14.com/public/js"
+
+...
+```
+
+## 14. Dan Luffy meminta untuk web www.general.mecha.franky.yyy.com hanya bisa diakses dengan port 15000 dan port 15500
+
+### a. `/etc/apache2/sites-available/general.mecha.franky.TI14.com.conf` (Skypie)
+
+```
+<VirtualHost *:15000 *:15500>
+    ServerAdmin webmaster@localhost
+    ServerName general.mecha.franky.TI14.com
+    ServerAlias www.general.mecha.franky.TI14.com
+    DocumentRoot /var/www/general.mecha.franky.TI14.com
+
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+```
+
+### b. Eksekusi Command
+```
+mkdir /var/www/general.mecha.franky.TI14.com
+wget https://github.com/FeinardSlim/Praktikum-Modul-2-Jarkom/raw/main/general.mecha.franky.zip -P /var/www/general.mecha.franky.TI14.com
+unzip general.mecha.franky.zip
+mv general.mecha.franky/* ../general.mecha.franky.TI14.com
+rmdir general.mecha.franky
+rm general.mecha.franky.zip
+a2ensite general.mecha.franky.TI14.com
+```
